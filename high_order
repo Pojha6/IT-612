@@ -1,0 +1,70 @@
+%%writefile code.js
+// =========================
+// Part A —
+// =========================
+const data = [5, 12, 3, 20, 11, 9, 30];
+
+// Loop mperative
+const loopResult = [];
+for (let i = 0; i < data.length; i++) {
+  if (data[i] > 10) {
+    loopResult.push(data[i] * 2);
+  }
+}
+
+// Pipeline
+const pipelineResult = data
+  .filter(x => x > 10)
+  .map(x => x * 2);
+
+console.log("Part A — loopResult:", loopResult);
+console.log("Part A — pipelineResult:", pipelineResult);
+console.log("Part A — match?", JSON.stringify(loopResult) === JSON.stringify(pipelineResult));
+console.log(""); // spacer
+
+// =========================
+// Part B — Pipeline with Redu
+// =========================
+const numbers = [1, 2, 3, 4, 5, 6];
+
+const sumDoubledEvens = numbers
+  .filter(n => n % 2 === 0)
+  .map(n => n * 2)
+  .reduce((sum, n) => sum + n, 0);
+
+console.log("Part B — sum of doubled evens:", sumDoubledEvens);
+console.log(""); // spacer
+
+// =========================
+// Part C
+// =========================
+const users = [
+  { id: 1, name: "Alice", age: 25 },
+  { id: 2, name: "Bob", age: 17 },
+  { id: 3, name: "Carol", age: 19 }
+];
+
+const anyUnder18 = users.some(u => u.age < 18);
+console.log("Part C — some (any user under 18?):", anyUnder18);
+
+const userId3 = users.find(u => u.id === 3);
+console.log("Part C — find (user with id === 3):", userId3);
+
+console.log("Part C — forEach (names):");
+users.forEach(u => console.log(u.name));
+console.log(""); // spacer
+
+// =========================
+// Part D —
+// =========================
+function repeat(n, action) {
+  for (let i = 0; i < n; i++) {
+    action(i);
+  }
+}
+
+console.log("Part D — repeat(3, console.log):");
+repeat(3, console.log);
+
+console.log("Part D — repeat(4, i => console.log('Step ' + i)):");
+repeat(4, i => console.log("Step " + i));
